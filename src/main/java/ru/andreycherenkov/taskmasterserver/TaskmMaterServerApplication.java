@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class TaskmasterserverApplication {
+public class TaskmMaterServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaskmasterserverApplication.class, args);
+		SpringApplication.run(TaskmMaterServerApplication.class, args);
 	}
 
 }
