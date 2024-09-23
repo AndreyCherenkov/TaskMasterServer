@@ -29,6 +29,7 @@ dependencies {
 	implementation 'io.swagger.core.v3:swagger-annotations:2.2.23'
 	implementation 'com.h2database:h2:1.3.148' // delete this dependency
 	implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
 
 	compileOnly 'org.projectlombok:lombok'
 
