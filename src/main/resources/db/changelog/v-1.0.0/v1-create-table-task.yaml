@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-create-table-task
+      author: a.cherenkov
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  defaultValue: gen_random_uuid()
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(128)
+                  defaultOnNull: true
+                  defaultValue: ""
+                  constraints:
+                    nullable: true
+              - column:
+                  name: start_date
+                  type: # todo need time?
+                  constraints:
+                    nullable: true
+              - column:
+                  name: end_date

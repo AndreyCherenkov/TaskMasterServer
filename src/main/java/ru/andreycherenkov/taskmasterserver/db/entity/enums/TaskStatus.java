@@ -1,4 +1,4 @@
-package ru.andreycherenkov.taskmasterserver.db;
+package ru.andreycherenkov.taskmasterserver.db.entity.enums;
 
 import lombok.Getter;
 

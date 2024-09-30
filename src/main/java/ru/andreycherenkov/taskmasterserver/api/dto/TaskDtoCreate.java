@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
-import ru.andreycherenkov.taskmasterserver.db.TaskStatus;
+import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
 @Getter
 @Setter

@@ -1,14 +1,19 @@
 package ru.andreycherenkov.taskmasterserver.impl.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.UserController;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserDataResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserRegisterDto;
+import ru.andreycherenkov.taskmasterserver.api.service.UserService;
 
 @RestController
+@AllArgsConstructor
 public class UserControllerImpl implements UserController {
+
+    private UserService userService;
 
     @Override
     public String test() {

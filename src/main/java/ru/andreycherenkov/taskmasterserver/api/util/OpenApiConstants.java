@@ -2,7 +2,7 @@ package ru.andreycherenkov.taskmasterserver.api.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import ru.andreycherenkov.taskmasterserver.db.TaskStatus;
+import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
 import java.time.LocalDateTime;
 

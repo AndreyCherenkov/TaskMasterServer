@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: taskmasterserver
+
+  #  todo add url, user, pwd
+  datasource:
+    url: 123
+    username: 1234
+    password: 123
