@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface TaskRepository extends CrudRepository<Task, UUID> {
 
-    List<Task> getTasks();
+    List<Task> findAllTasksById(UUID userId);
 
 }
