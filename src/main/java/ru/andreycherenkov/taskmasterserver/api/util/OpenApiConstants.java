@@ -2,9 +2,6 @@ package ru.andreycherenkov.taskmasterserver.api.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
-
-import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OpenApiConstants {
@@ -17,8 +14,8 @@ public class OpenApiConstants {
     public static final String EMAIL = "example@mail.ru";
     public static final String TASK_TITLE = "Important task";
     public static final String TASK_DESCRIPTION = "Important task description";
-    public static final TaskStatus TASK_STATUS = TaskStatus.NEW;
-    public static final LocalDateTime DUE_DATE = LocalDateTime.now();
-    public static final Integer AGE = 54;
+    public static final String TASK_STATUS = "NEW";
+    public static final String DUE_DATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String AGE = "54";
 
 }

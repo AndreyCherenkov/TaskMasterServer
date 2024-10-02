@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v-1.0.0/v1-1-create-enum-task_status.yaml
+  - include:
+      file: db/changelog/v-1.0.0/v1-2-create-table-user.yaml
+  - include:
+      file: db/changelog/v-1.0.0/v1-3-create-table-task.yaml

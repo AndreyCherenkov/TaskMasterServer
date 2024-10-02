@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-create-table-user
+      author: a.cherenkov
+      changes:
+        - sql: "CREATE TYPE task_status AS ENUM ('NEW', 'IN_PROGRESS', 'DONE')"

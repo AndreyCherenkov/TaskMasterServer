@@ -31,8 +31,8 @@ public class ApplicationUser {
 
     @OneToMany
     @JoinTable(
-            name = "", //todo прописать соединение юзеров с тасками
-            joinColumns = @JoinColumn(name = "")
+            name = "user_tasks",
+            joinColumns = @JoinColumn(name = "user_id")
     )
     private List<Task> tasks;
 }

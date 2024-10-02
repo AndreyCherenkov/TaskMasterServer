@@ -44,7 +44,7 @@ public class UserRegisterDto {
     private String confirmedPassword;
 
     @Schema(description = "Возраст пользователя.",
-//            example = OpenApiConstants.AGE, ПОЧЕМУ ОШИБКА?
+            example = OpenApiConstants.AGE,
             requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer age;
 

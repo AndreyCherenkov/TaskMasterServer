@@ -25,7 +25,7 @@ public class TaskDtoCreate {
     private String description;
     @Schema(description = "Статус задачи",
             example = OpenApiConstants.TASK_STATUS,
-            requiredMode = Schema.RequiredMode.REQUIRED) //todo ??
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private TaskStatus status;
 
 }

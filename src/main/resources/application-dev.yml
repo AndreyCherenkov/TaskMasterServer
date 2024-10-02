@@ -4,6 +4,19 @@ spring:
 
   #  todo add url, user, pwd
   datasource:
-    url: 123
-    username: 1234
-    password: 123
+    url: jdbc:postgresql://localhost:5431/taskmaster_db
+    username: postgres
+    password: postgres
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    url: jdbc:postgresql://localhost:5431/taskmaster_db
+    default-schema: public
+    liquibase-schema: public
+    user: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: none

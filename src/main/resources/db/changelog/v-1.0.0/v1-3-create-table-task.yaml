@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-create-table-task
+      author: a.cherenkov
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  autoIncrement: false
+                  constraints:
+                    defaultValue: gen_random_uuid()
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    referencedTableName: user
+                    referencedColumnNames: id
+              - column:
+                  name: title
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(128)
+                  defaultOnNull: true
+                  constraints:
+                    defaultValue: ""
+                    nullable: true
+              - column:
+                  name: status
+                  type: varchar(12)
+                  constraints:
+                    nullable: false
+                    checkConstraint: "status IN ('NEW', 'IN_PROGRESS', 'DONE')"
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: end_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updated_at
+                  type: datetime
+                  constraints:
+                    nullable: false

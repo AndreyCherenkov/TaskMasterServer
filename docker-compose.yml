@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: taskmaster_server_db
+      POSTGRES_DB: taskmaster_db
     command: postgres -c log_statement=all
 
 #  liquibase:

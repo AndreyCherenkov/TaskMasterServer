@@ -18,11 +18,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TaskDtoResponse {
 
-    private UUID userId; //todo delete this?
+    private UUID userId;
 
     @Schema(description = "Название задачи",
             example = OpenApiConstants.TASK_TITLE,
-            requiredMode = Schema.RequiredMode.REQUIRED) //todo продумать функц. требования
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private String title;
 
     @Schema(description = "Описание задачи",
@@ -32,11 +32,11 @@ public class TaskDtoResponse {
 
     @Schema(description = "Статус задачи",
             example = OpenApiConstants.TASK_STATUS,
-            requiredMode = Schema.RequiredMode.REQUIRED) //todo ??
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private TaskStatus status;
 
     @Schema(description = "Дата завершения задачи.",
-            example = OpenApiConstants.DUE_DATE, // todo ??
+            example = OpenApiConstants.DUE_DATE,
             requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dueDate;
