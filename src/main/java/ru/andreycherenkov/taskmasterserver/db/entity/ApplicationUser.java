@@ -3,6 +3,8 @@ package ru.andreycherenkov.taskmasterserver.db.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,9 +27,18 @@ public class ApplicationUser {
             nullable = false)
     private String username;
 
-    @Column(name = "password",
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "password_hash",
             nullable = false)
     private String password;
+
+    @Column(name = "created_at")
+    private LocalDate createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @OneToMany
     @JoinTable(

@@ -10,8 +10,8 @@ databaseChangeLog:
                   name: id
                   type: UUID
                   autoIncrement: false
+                  defaultValue: gen_random_uuid()
                   constraints:
-                    defaultValue: gen_random_uuid()
                     primaryKey: true
               - column:
                   name: user_id
@@ -30,8 +30,8 @@ databaseChangeLog:
                   name: description
                   type: varchar(128)
                   defaultOnNull: true
+                  defaultValue: ""
                   constraints:
-                    defaultValue: ""
                     nullable: true
               - column:
                   name: status

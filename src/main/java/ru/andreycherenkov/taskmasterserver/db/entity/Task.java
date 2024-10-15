@@ -5,6 +5,7 @@ import lombok.*;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -21,7 +22,10 @@ public class Task {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "title")
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description")
@@ -36,5 +40,8 @@ public class Task {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
 }

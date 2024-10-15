@@ -10,8 +10,8 @@ databaseChangeLog:
                   name: id
                   type: UUID
                   autoIncrement: false
+                  defaultValue: gen_random_uuid()
                   constraints:
-                    defaultValue: gen_random_uuid()
                     primaryKey: true
               - column:
                   name: username
@@ -23,7 +23,7 @@ databaseChangeLog:
                   name: email
                   type: varchar(64)
                   constraints:
-                    nullable: false
+                    nullable: true
                     unique: true
               - column:
                   name: password_hash
