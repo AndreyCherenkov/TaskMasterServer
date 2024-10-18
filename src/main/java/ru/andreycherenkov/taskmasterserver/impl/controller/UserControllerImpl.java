@@ -21,12 +21,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<Object> createUser(UserRegisterDto userRegisterDto) {
+    public ResponseEntity<UserDataResponse> createUser(UserRegisterDto userRegisterDto) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public ResponseEntity<Object> login(UserLoginDto userLoginDto) {
+    public ResponseEntity<UserDataResponse> login(UserLoginDto userLoginDto) {
         throw new UnsupportedOperationException();
     }
 

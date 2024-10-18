@@ -18,15 +18,12 @@ public interface UserController {
 
     //todo write DTO classes
     @PostMapping("/register")
-    ResponseEntity<Object> createUser(@RequestBody UserRegisterDto userRegisterDto);
+    ResponseEntity<UserDataResponse> createUser(@RequestBody UserRegisterDto userRegisterDto);
 
     @PostMapping("/login")
-    ResponseEntity<Object> login(@RequestBody UserLoginDto userLoginDto);
+    ResponseEntity<UserDataResponse> login(@RequestBody UserLoginDto userLoginDto);
 
     @GetMapping("/{userId}")
     ResponseEntity<UserDataResponse> getUser(@PathVariable String userId);
-
-
-
 
 }

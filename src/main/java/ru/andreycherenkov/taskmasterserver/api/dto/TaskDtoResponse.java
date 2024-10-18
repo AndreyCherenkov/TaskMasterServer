@@ -2,10 +2,7 @@ package ru.andreycherenkov.taskmasterserver.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
@@ -14,6 +11,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDtoResponse {

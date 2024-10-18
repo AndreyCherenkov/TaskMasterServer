@@ -9,22 +9,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration {
-
-    @Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public static UserDetailsService userDetailsService() {
-        //todo
-    }
-
-    @Bean
-    public static SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.build();
-    }
-}
+//@Configuration
+//@EnableWebSecurity
+//public class SecurityConfiguration {
+//
+//    @Bean
+//    public static PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    public static UserDetailsService userDetailsService() {
+//        //todo
+//    }
+//
+//    @Bean
+//    public static SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.build();
+//    }
+//}
