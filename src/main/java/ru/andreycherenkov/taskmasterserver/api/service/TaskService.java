@@ -15,6 +15,6 @@ public interface TaskService {
 
     ResponseEntity<TaskDtoResponse> createTask(@RequestBody TaskDtoCreate taskDtoCreate);
 
-    ResponseEntity<TaskDtoResponse> deleteTask(@PathVariable String taskId);
+    ResponseEntity<Void> deleteTask(@PathVariable String taskId);
 
 }

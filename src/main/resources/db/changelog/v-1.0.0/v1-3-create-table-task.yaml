@@ -19,7 +19,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_user_id
-                    referencedTableName: user
+                    referencedTableName: application_user
                     referencedColumnNames: id
               - column:
                   name: title

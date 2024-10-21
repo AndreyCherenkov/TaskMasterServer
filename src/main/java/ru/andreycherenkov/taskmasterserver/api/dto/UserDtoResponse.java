@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDataResponse {
+public class UserDtoResponse {
     //todo add @Schema
     private UUID id;
     private String username;

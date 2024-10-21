@@ -18,21 +18,21 @@ public class TaskControllerImpl implements TaskController {
 
     @Override
     public ResponseEntity<List<TaskDtoResponse>> getTasks(String userId) {
-        throw new UnsupportedOperationException();
+        return taskService.getTasks(userId);
     }
 
     @Override
     public ResponseEntity<TaskDtoResponse> getTask(String taskId) {
-        throw new UnsupportedOperationException();
+        return taskService.getTask(taskId);
     }
 
     @Override
     public ResponseEntity<TaskDtoResponse> createTask(TaskDtoCreate taskDtoCreate) {
-        throw new UnsupportedOperationException();
+        return taskService.createTask(taskDtoCreate);
     }
 
     @Override
-    public ResponseEntity<TaskDtoResponse> deleteTask(String taskId) {
-        throw new UnsupportedOperationException();
+    public ResponseEntity<Void> deleteTask(String taskId) {
+        return taskService.deleteTask(taskId);
     }
 }

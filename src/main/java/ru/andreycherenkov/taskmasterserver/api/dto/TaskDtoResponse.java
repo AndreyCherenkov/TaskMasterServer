@@ -16,6 +16,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TaskDtoResponse {
 
+    //todo @Schema
+    private UUID taskId;
+
     private UUID userId;
 
     @Schema(description = "Название задачи",

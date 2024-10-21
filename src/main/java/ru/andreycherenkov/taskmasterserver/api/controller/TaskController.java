@@ -23,8 +23,6 @@ public interface TaskController {
     ResponseEntity<TaskDtoResponse> createTask(@RequestBody TaskDtoCreate taskDtoCreate); //todo продумать ответ
 
     @DeleteMapping("/{taskId}")
-    ResponseEntity<TaskDtoResponse> deleteTask(@PathVariable String taskId);
-
-
+    ResponseEntity<Void> deleteTask(@PathVariable String taskId);
 
 }

@@ -14,11 +14,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "application_user")
 public class ApplicationUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
@@ -30,7 +30,7 @@ public class ApplicationUser {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "password_hash",
+    @Column(name = "password",
             nullable = false)
     private String password;
 
@@ -40,10 +40,6 @@ public class ApplicationUser {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany
-    @JoinTable(
-            name = "user_tasks",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
+    @OneToMany(mappedBy = "userId")
     private List<Task> tasks;
 }

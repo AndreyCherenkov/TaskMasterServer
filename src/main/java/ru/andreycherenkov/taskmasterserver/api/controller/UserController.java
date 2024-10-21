@@ -4,9 +4,9 @@ package ru.andreycherenkov.taskmasterserver.api.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserDataResponse;
+import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserRegisterDto;
+import ru.andreycherenkov.taskmasterserver.api.dto.UserCreateDto;
 
 //todo add @Validation
 @Tag(name = "UserController", description = "Endpoints to work with users")
@@ -14,16 +14,16 @@ import ru.andreycherenkov.taskmasterserver.api.dto.UserRegisterDto;
 public interface UserController {
 
     @GetMapping("/test")
-    String test();
+    ResponseEntity<String> test();
 
     //todo write DTO classes
     @PostMapping("/register")
-    ResponseEntity<UserDataResponse> createUser(@RequestBody UserRegisterDto userRegisterDto);
+    ResponseEntity<UserDtoResponse> createUser(@RequestBody UserCreateDto userCreateDto);
 
     @PostMapping("/login")
-    ResponseEntity<UserDataResponse> login(@RequestBody UserLoginDto userLoginDto);
+    ResponseEntity<UserDtoResponse> login(@RequestBody UserLoginDto userLoginDto);
 
     @GetMapping("/{userId}")
-    ResponseEntity<UserDataResponse> getUser(@PathVariable String userId);
+    ResponseEntity<UserDtoResponse> getUser(@PathVariable String userId);
 
 }

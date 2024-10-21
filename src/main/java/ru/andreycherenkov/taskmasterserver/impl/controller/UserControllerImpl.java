@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.UserController;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserDataResponse;
+import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserRegisterDto;
+import ru.andreycherenkov.taskmasterserver.api.dto.UserCreateDto;
 import ru.andreycherenkov.taskmasterserver.api.service.UserService;
 
 @RestController
@@ -16,22 +16,24 @@ public class UserControllerImpl implements UserController {
     private UserService userService;
 
     @Override
-    public String test() {
-        return "User controller getter test";
+    public ResponseEntity<String> test() {
+        String responseBody = "{\"message\": \"Hello, Android\"}"; // Правильный формат JSON
+        return ResponseEntity.ok(responseBody);
+    }
+
+
+    @Override
+    public ResponseEntity<UserDtoResponse> createUser(UserCreateDto userCreateDto) {
+        return userService.createUser(userCreateDto);
     }
 
     @Override
-    public ResponseEntity<UserDataResponse> createUser(UserRegisterDto userRegisterDto) {
+    public ResponseEntity<UserDtoResponse> login(UserLoginDto userLoginDto) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public ResponseEntity<UserDataResponse> login(UserLoginDto userLoginDto) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ResponseEntity<UserDataResponse> getUser(String userId) {
-        throw new UnsupportedOperationException();
+    public ResponseEntity<UserDtoResponse> getUser(String userId) {
+        return userService.getUser(userId);
     }
 }
