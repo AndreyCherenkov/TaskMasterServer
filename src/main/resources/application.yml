@@ -1,5 +1,14 @@
 spring:
   application:
-    name: transfer-service
+    name: taskmaster-server
   profiles:
-    active: dev
+    active: ${SPRING_PROFILE}
+  config:
+      import: optional:configserver:http://localhost:8071
+
+#todo настроить
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
