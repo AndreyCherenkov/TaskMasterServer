@@ -139,7 +139,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void testDeleteTask_NotFound() {
+    public void testDeleteTaskNotFound() {
 
         when(taskRepository.existsById(TASK_UUID)).thenReturn(false);
 
