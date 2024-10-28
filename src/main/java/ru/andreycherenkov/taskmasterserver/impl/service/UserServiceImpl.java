@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
         throw new UnsupportedOperationException();
     }
 
+    //todo добавить обработку невалидного UUID
     @Override
     public ResponseEntity<UserDtoResponse> getUser(String userId) {
         ApplicationUser user = userRepository.findById(UUID.fromString(userId))

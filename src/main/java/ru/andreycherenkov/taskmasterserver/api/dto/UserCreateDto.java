@@ -1,14 +1,12 @@
 package ru.andreycherenkov.taskmasterserver.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserCreateDto {

@@ -2,11 +2,11 @@ spring:
   application:
     name: taskmaster-server
   profiles:
-    active: ${SPRING_PROFILE}
+    active: dev
   config:
       import: optional:configserver:http://localhost:8071
 
-#todo настроить
+#todo настроить actuator
 management:
   endpoints:
     web:

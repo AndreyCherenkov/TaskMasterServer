@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TaskService {
 
-    ResponseEntity<List<TaskDtoResponse>> getTasks(@RequestHeader String userId);
+    ResponseEntity<List<TaskDtoResponse>> getTasks(@RequestHeader(name = "User-Id") String userId);
 
     ResponseEntity<TaskDtoResponse> getTask(@PathVariable String taskId);
 

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface TaskRepository extends CrudRepository<Task, UUID> {
 
-    List<Task> findAllTasksById(UUID userId);
+    List<Task> findAllTasksByUserId(UUID userId);
 
     Task deleteTaskById(UUID taskId);
 

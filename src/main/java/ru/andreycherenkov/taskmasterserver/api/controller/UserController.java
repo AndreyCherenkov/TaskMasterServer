@@ -16,14 +16,13 @@ public interface UserController {
     @GetMapping("/test")
     ResponseEntity<String> test();
 
-    //todo write DTO classes
     @PostMapping("/register")
     ResponseEntity<UserDtoResponse> createUser(@RequestBody UserCreateDto userCreateDto);
 
     @PostMapping("/login")
     ResponseEntity<UserDtoResponse> login(@RequestBody UserLoginDto userLoginDto);
 
-    @GetMapping("/{userId}")
-    ResponseEntity<UserDtoResponse> getUser(@PathVariable String userId);
+    @GetMapping
+    ResponseEntity<UserDtoResponse> getUser(@RequestHeader("User-Id") String userId);
 
 }

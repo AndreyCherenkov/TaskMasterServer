@@ -12,9 +12,8 @@ import java.util.List;
 @RequestMapping("api/v1/tasks")
 public interface TaskController {
 
-    //todo write DTO classes
     @GetMapping
-    ResponseEntity<List<TaskDtoResponse>> getTasks(@RequestHeader String userId);
+    ResponseEntity<List<TaskDtoResponse>> getTasks(@RequestHeader(name = "User-Id") String userId);
 
     @GetMapping("/{taskId}")
     ResponseEntity<TaskDtoResponse> getTask(@PathVariable String taskId);

@@ -10,27 +10,43 @@ import ru.andreycherenkov.taskmasterserver.api.service.TaskService;
 import ru.andreycherenkov.taskmasterserver.db.entity.Task;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 import ru.andreycherenkov.taskmasterserver.db.repository.TaskRepository;
+import ru.andreycherenkov.taskmasterserver.db.repository.UserRepository;
 import ru.andreycherenkov.taskmasterserver.impl.exception.NotFoundException;
 import ru.andreycherenkov.taskmasterserver.impl.mapper.TaskMapper;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
+    private UserRepository userRepository;
     private TaskRepository taskRepository;
     private TaskMapper taskMapper;
 
     @Override
+    @Transactional
     public ResponseEntity<List<TaskDtoResponse>> getTasks(String userId) {
-        List<TaskDtoResponse> responseList = taskRepository.findAllTasksById(UUID.fromString(userId))
+        UUID uuidUserId;
+        try {
+            uuidUserId = UUID.fromString(userId);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (!userRepository.existsById(uuidUserId)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<TaskDtoResponse> responseList = taskRepository.findAllTasksByUserId(uuidUserId)
                 .stream()
                 .map(taskMapper::taskToTaskDtoResponse)
-                .toList();
+                .collect(Collectors.toList());
         return ResponseEntity.ok(responseList);
     }
+
 
     @Override
     public ResponseEntity<TaskDtoResponse> getTask(String taskId) {
@@ -42,13 +58,24 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<TaskDtoResponse> createTask(TaskDtoCreate taskDtoCreate) {
+        UUID userId = taskDtoCreate.getUserId();
+
+        if (!userRepository.existsById(userId)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        setDefaultStatusIfNull(taskDtoCreate);
+        Task task = taskRepository.save(taskMapper.toTask(taskDtoCreate));
+        return ResponseEntity.ok(taskMapper.taskToTaskDtoResponse(task));
+    }
+
+
+    private void setDefaultStatusIfNull(TaskDtoCreate taskDtoCreate) {
         if (taskDtoCreate.getStatus() == null) {
             taskDtoCreate.setStatus(TaskStatus.NEW);
         }
-
-        Task task = taskRepository.save(taskMapper.toTask(taskDtoCreate));
-        return ResponseEntity.ok(taskMapper.taskToTaskDtoResponse(task));
     }
 
     @Override
