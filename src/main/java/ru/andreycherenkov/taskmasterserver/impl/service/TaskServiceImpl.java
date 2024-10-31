@@ -1,6 +1,7 @@
 package ru.andreycherenkov.taskmasterserver.impl.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,6 @@ import ru.andreycherenkov.taskmasterserver.impl.mapper.TaskMapper;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -43,8 +43,11 @@ public class TaskServiceImpl implements TaskService {
         List<TaskDtoResponse> responseList = taskRepository.findAllTasksByUserId(uuidUserId)
                 .stream()
                 .map(taskMapper::taskToTaskDtoResponse)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseList);
+                .toList();
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(responseList);
     }
 
 
@@ -54,7 +57,9 @@ public class TaskServiceImpl implements TaskService {
                 taskRepository.findById(UUID.fromString(taskId))
                         .orElseThrow(() -> new NotFoundException("Task not found"))
         );
-        return ResponseEntity.ok(dtoResponse);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(dtoResponse);
     }
 
     @Override
@@ -68,7 +73,10 @@ public class TaskServiceImpl implements TaskService {
 
         setDefaultStatusIfNull(taskDtoCreate);
         Task task = taskRepository.save(taskMapper.toTask(taskDtoCreate));
-        return ResponseEntity.ok(taskMapper.taskToTaskDtoResponse(task));
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(taskMapper.taskToTaskDtoResponse(task));
     }
 
 

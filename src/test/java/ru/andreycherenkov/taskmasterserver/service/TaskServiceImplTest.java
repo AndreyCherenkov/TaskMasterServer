@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoCreate;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoResponse;
@@ -115,7 +116,9 @@ public class TaskServiceImplTest {
 
         ResponseEntity<TaskDtoResponse> response = taskService.getTask(TASK_UUID.toString());
 
-        assertEquals(ResponseEntity.ok(taskDtoResponse), response);
+        assertEquals(ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(taskDtoResponse), response);
 
         verify(taskRepository).findById(TASK_UUID);
         verify(taskMapper).taskToTaskDtoResponse(task);

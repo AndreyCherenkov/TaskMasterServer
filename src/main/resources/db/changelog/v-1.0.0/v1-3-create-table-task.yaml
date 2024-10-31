@@ -17,7 +17,7 @@ databaseChangeLog:
                   name: user_id
                   type: UUID
                   constraints:
-                    nullable: false
+                    nullable: true
                     foreignKeyName: fk_user_id
                     referencedTableName: application_user
                     referencedColumnNames: id

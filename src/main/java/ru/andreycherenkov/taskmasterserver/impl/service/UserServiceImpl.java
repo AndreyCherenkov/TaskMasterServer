@@ -1,6 +1,7 @@
 package ru.andreycherenkov.taskmasterserver.impl.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
@@ -29,7 +30,9 @@ public class UserServiceImpl implements UserService {
         }
 
         ApplicationUser user = userRepository.save(userMapper.toUser(userCreateDto));
-        return ResponseEntity.ok(userMapper.applicationUserToUserDtoResponse(user));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userMapper.applicationUserToUserDtoResponse(user));
     }
 
     @Override
@@ -37,11 +40,12 @@ public class UserServiceImpl implements UserService {
         throw new UnsupportedOperationException();
     }
 
-    //todo добавить обработку невалидного UUID
     @Override
     public ResponseEntity<UserDtoResponse> getUser(String userId) {
         ApplicationUser user = userRepository.findById(UUID.fromString(userId))
                 .orElseThrow(() -> new NotFoundException("User not found"));
-        return ResponseEntity.ok(userMapper.applicationUserToUserDtoResponse(user));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userMapper.applicationUserToUserDtoResponse(user));
     }
 }

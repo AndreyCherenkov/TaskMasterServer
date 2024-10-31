@@ -27,7 +27,8 @@ public class ApplicationUser {
             nullable = false)
     private String username;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email",
+            unique = true)
     private String email;
 
     @Column(name = "password",
