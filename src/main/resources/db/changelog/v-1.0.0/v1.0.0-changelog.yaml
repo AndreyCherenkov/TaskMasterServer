@@ -2,6 +2,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/v-1.0.0/v1-1-create-enum-task_status.yaml
   - include:
-      file: db/changelog/v-1.0.0/v1-2-create-table-application_user.yaml
+      file: db/changelog/v-1.0.0/v1-2-create-enum-task_priority.yaml
   - include:
-      file: db/changelog/v-1.0.0/v1-3-create-table-task.yaml
+      file: db/changelog/v-1.0.0/v1-3-create-table-application_user.yaml
+  - include:
+      file: db/changelog/v-1.0.0/v1-4-create-table-task.yaml

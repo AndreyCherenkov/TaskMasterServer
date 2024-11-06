@@ -82,9 +82,7 @@ public class UserControllerImplTest {
                 .when()
                 .post(REQUEST_MAPPING + "/register")
                 .then()
-                .statusCode(200)
-                .extract().response();
-
+                .statusCode(200);
     }
 
     @Test

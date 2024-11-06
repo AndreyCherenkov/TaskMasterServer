@@ -10,7 +10,7 @@ databaseChangeLog:
                   name: id
                   type: UUID
                   autoIncrement: false
-                  defaultValue: gen_random_uuid()
+                  defaultValue: gen_random_uuid() #todo try without it
                   constraints:
                     primaryKey: true
               - column:
