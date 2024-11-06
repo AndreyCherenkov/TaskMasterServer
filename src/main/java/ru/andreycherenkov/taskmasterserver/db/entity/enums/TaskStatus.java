@@ -9,9 +9,9 @@ public enum TaskStatus {
     IN_PROGRESS("в процессе"),
     DONE("выполнена");
 
-    private String description;
+    private String status;
 
     TaskStatus(String description) {
-        this.description = description;
+        this.status = description;
     }
 }

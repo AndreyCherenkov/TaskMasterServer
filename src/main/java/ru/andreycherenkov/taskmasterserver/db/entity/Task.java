@@ -2,6 +2,7 @@ package ru.andreycherenkov.taskmasterserver.db.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskPriority;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
 import java.time.LocalDate;
@@ -30,6 +31,9 @@ public class Task {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "priority")
+    private TaskPriority priority;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

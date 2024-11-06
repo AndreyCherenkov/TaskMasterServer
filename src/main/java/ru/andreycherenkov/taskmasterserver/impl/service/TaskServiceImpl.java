@@ -50,7 +50,6 @@ public class TaskServiceImpl implements TaskService {
                 .body(responseList);
     }
 
-
     @Override
     public ResponseEntity<TaskDtoResponse> getTask(String taskId) {
         TaskDtoResponse dtoResponse = taskMapper.taskToTaskDtoResponse(
@@ -78,7 +77,6 @@ public class TaskServiceImpl implements TaskService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(taskMapper.taskToTaskDtoResponse(task));
     }
-
 
     private void setDefaultStatusIfNull(TaskDtoCreate taskDtoCreate) {
         if (taskDtoCreate.getStatus() == null) {
