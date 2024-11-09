@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoCreate;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoResponse;
+import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoUpdate;
 import ru.andreycherenkov.taskmasterserver.api.service.TaskService;
 import ru.andreycherenkov.taskmasterserver.db.entity.Task;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
@@ -72,7 +73,14 @@ public class TaskServiceImpl implements TaskService {
 
         setDefaultStatusIfNull(taskDtoCreate);
         Task task = taskRepository.save(taskMapper.toTask(taskDtoCreate));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(taskMapper.taskToTaskDtoResponse(task));
+    }
 
+    @Override
+    public ResponseEntity<TaskDtoResponse> updateTask(TaskDtoUpdate taskDtoUpdate) {
+        Task task = taskRepository.save(taskMapper.toTask(taskDtoUpdate));
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(taskMapper.taskToTaskDtoResponse(task));

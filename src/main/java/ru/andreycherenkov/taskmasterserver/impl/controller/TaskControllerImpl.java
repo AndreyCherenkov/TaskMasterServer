@@ -1,11 +1,14 @@
 package ru.andreycherenkov.taskmasterserver.impl.controller;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.TaskController;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoCreate;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoResponse;
+import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoUpdate;
 import ru.andreycherenkov.taskmasterserver.api.service.TaskService;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
 public class TaskControllerImpl implements TaskController {
 
     private TaskService taskService;
+
+    private final Logger logger = LoggerFactory.getLogger(TaskControllerImpl.class);
 
     @Override
     public ResponseEntity<List<TaskDtoResponse>> getTasks(String userId) {
@@ -28,7 +33,14 @@ public class TaskControllerImpl implements TaskController {
 
     @Override
     public ResponseEntity<TaskDtoResponse> createTask(TaskDtoCreate taskDtoCreate) {
-        return taskService.createTask(taskDtoCreate);
+        ResponseEntity<TaskDtoResponse> response =  taskService.createTask(taskDtoCreate);
+        System.out.println(response.getBody());
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<TaskDtoResponse> updateTask(TaskDtoUpdate taskDtoUpdate) {
+        return taskService.updateTask(taskDtoUpdate);
     }
 
     @Override

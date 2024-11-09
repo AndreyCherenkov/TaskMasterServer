@@ -10,6 +10,4 @@ public interface TaskRepository extends CrudRepository<Task, UUID> {
 
     List<Task> findAllTasksByUserId(UUID userId);
 
-    Task deleteTaskById(UUID taskId);
-
 }
