@@ -3,4 +3,4 @@ databaseChangeLog:
       id: v1-create-table-task_priority
       author: a.cherenkov
       changes:
-        - "CREATE TYPE task_priority AS ENUM ('LOW', 'MEDIUM', 'HIGH')"
+        - sql: "CREATE TYPE task_priority AS ENUM ('LOW', 'MEDIUM', 'HIGH')"

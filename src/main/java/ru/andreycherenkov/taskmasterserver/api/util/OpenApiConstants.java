@@ -15,7 +15,10 @@ public class OpenApiConstants {
     public static final String TASK_TITLE = "Important task";
     public static final String TASK_DESCRIPTION = "Important task description";
     public static final String TASK_STATUS = "NEW";
-    public static final String DUE_DATE = "yyyy-MM-dd HH:mm:ss";
+    public static final String TASK_PRIORITY = "MEDIUM";
+    public static final String DUE_DATE = "yyyy-MM-dd";
     public static final String AGE = "54";
+    public static final String USER_UUID = "8f793b2c-4536-4125-94be-57998e58ffa9";
+    public static final String TASK_UUID = "8f793b2c-4536-4125-94be-57998e58ffa8";
 
 }

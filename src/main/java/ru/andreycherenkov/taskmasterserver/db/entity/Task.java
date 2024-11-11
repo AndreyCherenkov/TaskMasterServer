@@ -45,7 +45,7 @@ public class Task {
     private LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDate dueDate;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

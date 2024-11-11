@@ -8,21 +8,26 @@ import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskPriority;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Builder
-@ToString //todo delete
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDtoResponse {
 
-    //todo @Schema
+    @Schema(description = "UUID задачи",
+            example = OpenApiConstants.TASK_UUID,
+            requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("task_id")
     private UUID taskId;
 
+    @Schema(description = "UUID пользователя",
+            example = OpenApiConstants.USER_UUID,
+            requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("user_id")
     private UUID userId;
 
@@ -38,6 +43,9 @@ public class TaskDtoResponse {
     @JsonProperty("description")
     private String description;
 
+    @Schema(description = "Приоритет задачи",
+            example = OpenApiConstants.TASK_PRIORITY,
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private TaskPriority priority;
 
     @Schema(description = "Статус задачи",
@@ -50,14 +58,15 @@ public class TaskDtoResponse {
             example = OpenApiConstants.DUE_DATE,
             requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("start_date")
-    private LocalDateTime startDate;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
 
     @Schema(description = "Дата завершения задачи.",
             example = OpenApiConstants.DUE_DATE,
             requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("due_date")
-    private LocalDateTime dueDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dueDate;
 
     @JsonProperty("updated_at")
     private LocalDateTime updatedAt;

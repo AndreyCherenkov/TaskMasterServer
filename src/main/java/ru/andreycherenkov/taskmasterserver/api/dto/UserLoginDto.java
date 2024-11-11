@@ -20,6 +20,6 @@ public class UserLoginDto {
     @Schema(description = "Пароль пользователя.",
             example = OpenApiConstants.PASSWORD,
             requiredMode = Schema.RequiredMode.REQUIRED)
-    private String password; //todo передаёс пароль напрямую?
+    private String password;
 
 }

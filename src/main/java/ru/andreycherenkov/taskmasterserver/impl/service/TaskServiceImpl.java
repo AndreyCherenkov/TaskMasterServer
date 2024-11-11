@@ -80,7 +80,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public ResponseEntity<TaskDtoResponse> updateTask(TaskDtoUpdate taskDtoUpdate) {
-        Task task = taskRepository.save(taskMapper.toTask(taskDtoUpdate));
+        Task existingTask = taskRepository.findById(taskDtoUpdate.getTaskId())
+                .orElseThrow(() -> new NotFoundException("Task not found"));
+
+        taskMapper.updateTaskFromDto(taskDtoUpdate, existingTask);
+
+        Task task = taskRepository.save(existingTask);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(taskMapper.taskToTaskDtoResponse(task));

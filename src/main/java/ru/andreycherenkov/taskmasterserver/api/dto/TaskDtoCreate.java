@@ -3,7 +3,6 @@ package ru.andreycherenkov.taskmasterserver.api.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.*;
 import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 import ru.andreycherenkov.taskmasterserver.db.entity.enums.TaskPriority;
@@ -14,13 +13,14 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString //todo delete!
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDtoCreate {
 
-    //todo @Schema
+    @Schema(description = "UUID пользователя",
+            example = OpenApiConstants.USER_UUID,
+            requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("user_id")
     private UUID userId;
 
@@ -36,7 +36,9 @@ public class TaskDtoCreate {
     @JsonProperty("description")
     private String description;
 
-    @Schema() //todo add schema
+    @Schema(description = "Приоритет задачи",
+            example = OpenApiConstants.TASK_PRIORITY,
+            requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("priority")
     private TaskPriority priority;
 

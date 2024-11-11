@@ -24,7 +24,7 @@ public class UserCreateDto {
     @Schema(description = "Пароль пользователя",
             example = OpenApiConstants.PASSWORD,
             requiredMode = Schema.RequiredMode.REQUIRED)
-    private String password; //todo передаём пароль напрямую?
+    private String password;
 
     @Schema(description = "Пароль пользователя (подтверждение)",
             example = OpenApiConstants.CONFIRMED_PASSWORD,
