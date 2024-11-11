@@ -1,14 +1,31 @@
 spring:
   application:
-    name: taskmaster-server
-  profiles:
-    active: dev
-  config:
-      import: optional:configserver:http://localhost:8071
+    name: taskmasterserver
 
-#todo настроить actuator
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  liquibase:
+    change-log: ${CHANGELOG}
+    enabled: true
+    url: ${DB_URL}
+    default-schema: public
+    liquibase-schema: public
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  logging:
+    level:
+      org.hibernate.SQL: OFF
+      org.hibernate.type.descriptor.sql.BasicTypeDescriptor: OFF
+
+jwt:
+  access-token-key: '{"kty":"oct","k":"hi7S5RX5ZRZooHA0RKGctZ-KtR9FoESgCnH-3BNg5XI"}'
+  refresh-token-key: '{"kty":"oct","k":"956PBFst1FguLr5irJD-aQ"}'

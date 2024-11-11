@@ -1,6 +1,7 @@
 package ru.andreycherenkov.taskmasterserver.impl.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.UserController;
@@ -18,9 +19,10 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<String> test() {
         String responseBody = "{\"message\": \"Hello, Android\"}"; // Правильный формат JSON
-        return ResponseEntity.ok(responseBody);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(responseBody);
     }
-
 
     @Override
     public ResponseEntity<UserDtoResponse> createUser(UserCreateDto userCreateDto) {

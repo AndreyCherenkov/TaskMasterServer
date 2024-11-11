@@ -3,6 +3,7 @@ package ru.andreycherenkov.taskmasterserver.impl.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoCreate;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.TaskDtoUpdate;
@@ -22,7 +23,6 @@ import java.util.UUID;
 public interface TaskMapper {
 
     @Mapping(target = "taskId", source = "id")
-    @Mapping(target = "dueDate", source = "endDate")
     TaskDtoResponse taskToTaskDtoResponse(Task task);
 
     @Mapping(target = "startDate", expression = "java(LocalDate.now())")
@@ -30,8 +30,10 @@ public interface TaskMapper {
     Task toTask(TaskDtoCreate taskDtoCreate);
 
     @Mapping(target = "id", source = "taskId")
-    @Mapping(target = "endDate", source = "dueDate")
     @Mapping(target = "updatedAt", expression = "java(LocalDateTime.now())")
     Task toTask(TaskDtoUpdate taskDtoUpdate);
+
+    @Mapping(target = "updatedAt", expression = "java(LocalDateTime.now())")
+    void updateTaskFromDto(TaskDtoUpdate taskDtoUpdate, @MappingTarget Task task);
 
 }
