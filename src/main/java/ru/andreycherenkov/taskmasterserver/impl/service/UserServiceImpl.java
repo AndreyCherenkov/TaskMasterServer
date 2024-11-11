@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
         userCreateDto.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
         ApplicationUser user = userRepository.save(userMapper.toUser(userCreateDto));
         UserDtoResponse userDtoResponse = userMapper.applicationUserToUserDtoResponse(user);
+        userDtoResponse.setUserId(user.getId());
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
