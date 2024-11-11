@@ -1,8 +1,28 @@
 version: "3.9"
 
+networks:
+  taskmasterserver-network:
+    driver: bridge
+
 services:
+  taskmasterserver:
+    image: taskmasterserver:slim
+    networks:
+      - taskmasterserver-network
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://taskmaster_server_db:5432/taskmaster_db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      CHANGELOG: classpath:/db/changelog/db.changelog-master.yaml
+
   postgres:
     image: postgres:16.4
+    networks:
+      - taskmasterserver-network
     container_name: taskmaster_server_db
     ports:
       - "5431:5432"
@@ -14,6 +34,8 @@ services:
 
 #  liquibase:
 #    image: liquibase/liquibase
+#    networks:
+#      - taskmasterserver-network
 #    container_name: liquibase
 #    depends_on:
 #      - postgres
@@ -24,7 +46,7 @@ services:
 #    command:
 #      [ "/liquibase/liquibase",
 #        "--changeLogFile=db.changelog-master.yaml",
-#        "--url=jdbc:postgresql://transfer_db:5432/transfer_service_db",
+#        "--url=jdbc:postgresql://taskmaster_server_db:5432/taskmaster_db",
 #        "--username=postgres",
 #        "--password=postgres",
 #        "update" ]
