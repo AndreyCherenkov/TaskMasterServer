@@ -52,10 +52,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<UserDtoResponse> getUser(String userId) {
-        ApplicationUser user = userRepository.findById(UUID.fromString(userId))
+        UUID userUUID = UUID.fromString(userId);
+        ApplicationUser user = userRepository.findById(userUUID)
                 .orElseThrow(() -> new NotFoundException("User not found"));
+        UserDtoResponse dtoResponse = userMapper.applicationUserToUserDtoResponse(user);
+        dtoResponse.setUserId(user.getId());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userMapper.applicationUserToUserDtoResponse(user));
+                .body(dtoResponse);
     }
 }

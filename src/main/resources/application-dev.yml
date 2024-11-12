@@ -10,7 +10,7 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     enabled: true
-    url: jdbc:postgresql://localhost:5432/taskmaster_db
+    url: jdbc:postgresql://localhost:5431/taskmaster_db
     default-schema: public
     liquibase-schema: public
     user: postgres
