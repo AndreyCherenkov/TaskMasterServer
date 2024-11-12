@@ -1,27 +1,30 @@
 package ru.andreycherenkov.taskmasterserver.impl.config;
 
-import lombok.AllArgsConstructor;
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.crypto.DirectEncrypter;
+import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.jwk.OctetSequenceKey;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.andreycherenkov.taskmasterserver.db.repository.UserRepository;
+import ru.andreycherenkov.taskmasterserver.impl.serializer.AccessTokenJwsStringSerializer;
+import ru.andreycherenkov.taskmasterserver.impl.serializer.RefreshTokenJweStringSerializer;
+import ru.andreycherenkov.taskmasterserver.impl.service.CustomUserDetailsService;
+
+import java.text.ParseException;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
 public class SecurityConfiguration {
-
-    private UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -29,8 +32,30 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.build();
+    public JwtAuthenticationConfigurer jwtAuthenticationConfigurer(
+            @Value("${jwt.access-token-key}") String accessTokenKey,
+            @Value("${jwt.refresh-token-key}") String refreshTokenKey
+    ) throws ParseException, JOSEException {
+        return JwtAuthenticationConfigurer.builder()
+                .accessTokenStringSerializer(new AccessTokenJwsStringSerializer(
+                        new MACSigner(OctetSequenceKey.parse(accessTokenKey))
+                ))
+                .refreshTokenStringSerializer(new RefreshTokenJweStringSerializer(
+                        new DirectEncrypter(OctetSequenceKey.parse(refreshTokenKey))
+                ))
+                .build();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   JwtAuthenticationConfigurer jwtAuthenticationConfigurer) throws Exception {
+//        http.sessionManagement(session
+//                        -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                  .with(jwtAuthenticationConfigurer, Customizer.withDefaults())
+//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); //todo исправить
+//        http.authenticationProvider(authenticationProvider());
+        return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(request -> request.anyRequest().permitAll()).build();
+
     }
 
     @Bean
@@ -43,6 +68,6 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager();
+        return new CustomUserDetailsService();
     }
 }

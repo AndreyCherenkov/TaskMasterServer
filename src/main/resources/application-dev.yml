@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: taskmasterserver
+
+  datasource:
+    url: jdbc:postgresql://localhost:5431/taskmaster_db
+    username: postgres
+    password: postgres
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/taskmaster_db
+    default-schema: public
+    liquibase-schema: public
+    user: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+jwt:
+  access-token-key: '{"kty":"oct","k":"hi7S5RX5ZRZooHA0RKGctZ-KtR9FoESgCnH-3BNg5XI"}'
+  refresh-token-key: '{"kty":"oct","k":"956PBFst1FguLr5irJD-aQ"}'
