@@ -18,6 +18,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
       CHANGELOG: classpath:/db/changelog/db.changelog-master.yaml
+      JWT_SECRET_KEY: A7dZh2LBX16j1pnNgq8kSG40jnRrwYChlT8uOEg/smI=
 
   postgres:
     image: postgres:16.4

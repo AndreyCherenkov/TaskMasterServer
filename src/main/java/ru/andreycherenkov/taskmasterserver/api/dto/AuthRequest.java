@@ -9,9 +9,8 @@ import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDto {
+public class AuthRequest {
 
     @Schema(description = "Логин пользователя.",
             example = OpenApiConstants.USERNAME,

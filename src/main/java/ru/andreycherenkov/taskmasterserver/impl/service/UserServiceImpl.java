@@ -3,14 +3,17 @@ package ru.andreycherenkov.taskmasterserver.impl.service;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserCreateDto;
+import ru.andreycherenkov.taskmasterserver.api.dto.*;
 import ru.andreycherenkov.taskmasterserver.api.service.UserService;
 import ru.andreycherenkov.taskmasterserver.db.entity.ApplicationUser;
 import ru.andreycherenkov.taskmasterserver.db.repository.UserRepository;
+import ru.andreycherenkov.taskmasterserver.impl.component.JwtUtil;
 import ru.andreycherenkov.taskmasterserver.impl.exception.NotFoundException;
 import ru.andreycherenkov.taskmasterserver.impl.exception.PasswordConfirmationException;
 import ru.andreycherenkov.taskmasterserver.impl.mapper.UserMapper;
@@ -20,6 +23,10 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    private AuthenticationProvider authenticationProvider;
+    private JwtUtil jwtUtil;
+    private UserDetailsService userDetailsService;
 
     private UserRepository userRepository;
     private UserMapper userMapper;
@@ -46,8 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UserDtoResponse> login(UserLoginDto userLoginDto) {
-        throw new UnsupportedOperationException();
+    public ResponseEntity<AuthResponse> login(AuthRequest authRequest) {
+        authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())); //todo бросить HttpStatus.UNAUTHORIZED
+        UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+        String jwt = jwtUtil.generateToken(Token.builder()
+                .userId(userRepository.findUserByUsername(authRequest.getUsername()).get().getId()) //todo отрефакторить
+                .username(userDetails.getUsername())
+                .build());
+        AuthResponse authResponse = new AuthResponse(jwt);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(authResponse);
+
     }
 
     @Override
