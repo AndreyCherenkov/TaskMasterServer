@@ -14,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@ToString //todo delete
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDtoCreate {

@@ -7,10 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.andreycherenkov.taskmasterserver.api.util.OpenApiConstants;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @AllArgsConstructor
 public class AuthResponse {
+
+    @Schema(description = "UUID пользователя",
+            example = OpenApiConstants.USER_UUID,
+            requiredMode = Schema.RequiredMode.REQUIRED)
+    @JsonProperty("user_id")
+    private UUID userId;
 
     @Schema(description = "jwt-токен",
             example = OpenApiConstants.USER_UUID, //todo аписать пример токена для swagger

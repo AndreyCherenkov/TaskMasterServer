@@ -1,6 +1,7 @@
 package ru.andreycherenkov.taskmasterserver.impl.controller;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.TaskController;
@@ -29,6 +30,8 @@ public class TaskControllerImpl implements TaskController {
 
     @Override
     public ResponseEntity<TaskDtoResponse> createTask(TaskDtoCreate taskDtoCreate) {
+        var a = LoggerFactory.getLogger(TaskControllerImpl.class);
+        a.info("CALL CREATE TASK", taskDtoCreate.getPriority());
         return taskService.createTask(taskDtoCreate);
     }
 

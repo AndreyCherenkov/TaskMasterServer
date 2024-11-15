@@ -60,6 +60,11 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/api/v1/users/register", "/api/v1/users/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
+                .logout(request ->
+                        request.logoutUrl("/api/v1/users/logout")
+                                .logoutSuccessUrl("/login?logout")
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID"))
                 .build();
 
 //        return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(request -> request.anyRequest().permitAll()).build();

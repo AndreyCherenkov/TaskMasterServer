@@ -19,7 +19,6 @@ import ru.andreycherenkov.taskmasterserver.impl.exception.PasswordConfirmationEx
 import ru.andreycherenkov.taskmasterserver.impl.mapper.UserMapper;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -63,18 +62,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<AuthResponse> login(AuthRequest authRequest) {
-        authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())); //todo бросить HttpStatus.UNAUTHORIZED
-        UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+    public ResponseEntity<AuthResponse> login(UserLoginDto userLoginDto) {
+        authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.getUsername(), userLoginDto.getPassword())); //todo бросить HttpStatus.UNAUTHORIZED
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userLoginDto.getUsername());
         String jwt = jwtUtil.generateToken(Token.builder()
-                .userId(userRepository.findUserByUsername(authRequest.getUsername()).get().getId()) //todo отрефакторить
+                .userId(userRepository.findUserByUsername(userLoginDto.getUsername()).get().getId()) //todo отрефакторить
                 .username(userDetails.getUsername())
                 .build());
-        AuthResponse authResponse = new AuthResponse(jwt);
+        AuthResponse authResponse = new AuthResponse(
+                userRepository.findUserByUsername(userLoginDto.getUsername()).get().getId(), //todo отрефакторить
+                jwt);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(authResponse);
 
+    }
+
+    @Override
+    public ResponseEntity<Void> logout() {
+        throw new UnsupportedOperationException();
     }
 
     @Override

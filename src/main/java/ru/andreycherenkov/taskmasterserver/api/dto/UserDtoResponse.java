@@ -33,4 +33,11 @@ public class UserDtoResponse {
            requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonProperty("email")
     private String email;
+
+    @Schema(description = "jwt-токен",
+            example = OpenApiConstants.USER_UUID, //todo аписать пример токена для swagger
+            requiredMode = Schema.RequiredMode.REQUIRED)
+    @JsonProperty("jwt_token")
+    private String jwtToken;
+
 }
