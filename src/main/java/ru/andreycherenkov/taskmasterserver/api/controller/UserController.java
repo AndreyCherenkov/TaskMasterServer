@@ -4,8 +4,9 @@ package ru.andreycherenkov.taskmasterserver.api.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.andreycherenkov.taskmasterserver.api.dto.AuthResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
+import ru.andreycherenkov.taskmasterserver.api.dto.AuthRequest;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserCreateDto;
 
 //todo add @Validation
@@ -20,7 +21,7 @@ public interface UserController {
     ResponseEntity<UserDtoResponse> createUser(@RequestBody UserCreateDto userCreateDto);
 
     @PostMapping("/login")
-    ResponseEntity<UserDtoResponse> login(@RequestBody UserLoginDto userLoginDto);
+    ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest);
 
     @GetMapping
     ResponseEntity<UserDtoResponse> getUser(@RequestHeader("User-Id") String userId);

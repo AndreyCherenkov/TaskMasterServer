@@ -5,8 +5,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.andreycherenkov.taskmasterserver.api.controller.UserController;
+import ru.andreycherenkov.taskmasterserver.api.dto.AuthResponse;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserDtoResponse;
-import ru.andreycherenkov.taskmasterserver.api.dto.UserLoginDto;
+import ru.andreycherenkov.taskmasterserver.api.dto.AuthRequest;
 import ru.andreycherenkov.taskmasterserver.api.dto.UserCreateDto;
 import ru.andreycherenkov.taskmasterserver.api.service.UserService;
 
@@ -30,8 +31,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<UserDtoResponse> login(UserLoginDto userLoginDto) {
-        throw new UnsupportedOperationException();
+    public ResponseEntity<AuthResponse> login(AuthRequest authRequest) {
+        return userService.login(authRequest);
     }
 
     @Override

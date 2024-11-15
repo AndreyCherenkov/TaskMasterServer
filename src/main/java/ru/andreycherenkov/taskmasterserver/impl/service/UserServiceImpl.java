@@ -19,6 +19,7 @@ import ru.andreycherenkov.taskmasterserver.impl.exception.PasswordConfirmationEx
 import ru.andreycherenkov.taskmasterserver.impl.mapper.UserMapper;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -36,15 +37,24 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<UserDtoResponse> createUser(UserCreateDto userCreateDto) {
         validatePassword(userCreateDto);
 
-        userCreateDto.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
+        String encodedPassword = passwordEncoder.encode(userCreateDto.getPassword());
+        userCreateDto.setPassword(encodedPassword);
+
         ApplicationUser user = userRepository.save(userMapper.toUser(userCreateDto));
+
         UserDtoResponse userDtoResponse = userMapper.applicationUserToUserDtoResponse(user);
         userDtoResponse.setUserId(user.getId());
 
+        String jwt = jwtUtil.generateToken(Token.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .build());
+        userDtoResponse.setJwtToken(jwt);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userDtoResponse);
     }
+
 
     private void validatePassword(UserCreateDto userCreateDto) {
         if (!userCreateDto.getPassword().equals(userCreateDto.getConfirmedPassword())) {
