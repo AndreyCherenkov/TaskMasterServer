@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/v1/users/register", "/api/v1/users/login").permitAll();
+                    auth.requestMatchers("/api/v1/users/register", "/api/v1/users/login", "/swagger-ui/**").permitAll(); //todo настроить swagger под работу с security
                     auth.anyRequest().authenticated();
                 })
                 .logout(request ->

@@ -54,7 +54,6 @@ public class TaskDtoUpdate {
     @JsonProperty("task_status")
     private TaskStatus status;
 
-
     @Schema(description = "Дата начала задачи.",
            example = OpenApiConstants.DUE_DATE,
            requiredMode = Schema.RequiredMode.REQUIRED)
